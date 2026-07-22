@@ -417,6 +417,7 @@ showSurprise.onclick = () => {
     document.documentElement.style.overflowY = "auto";
     document.documentElement.style.height = "auto";
 
+    // Scroll to the surprise text
     setTimeout(() => {
 
         surpriseText.scrollIntoView({
@@ -425,6 +426,13 @@ showSurprise.onclick = () => {
         });
 
     }, 300);
+
+    // Start the meteor shower after a short delay
+    setTimeout(() => {
+
+        startMeteorShower();
+
+    }, 2000);
 
 };
 function startMeteorShower() {
