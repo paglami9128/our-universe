@@ -399,23 +399,32 @@ playVoice.onclick=()=>{
 
 };
 
-voiceAudio.onended=()=>{
+voiceAudio.onended = () => {
 
-    showSurprise.style.display="block";
+    showSurprise.click();
 
 };
 
 showSurprise.onclick = () => {
 
     showSurprise.style.display = "none";
-
     surpriseText.style.display = "block";
+
+    // Enable scrolling on mobile
+    document.body.style.overflowY = "auto";
+    document.body.style.height = "auto";
+
+    document.documentElement.style.overflowY = "auto";
+    document.documentElement.style.height = "auto";
 
     setTimeout(() => {
 
-        startMeteorShower();
+        surpriseText.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 
-    }, 1800);
+    }, 300);
 
 };
 function startMeteorShower() {
@@ -483,26 +492,31 @@ function createMeteor(){
     }, duration * 1000 + 500);
 
 }
-function showFinalEnding(){
+function showFinalEnding() {
 
     finalChapter.style.opacity = "0";
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        finalChapter.style.display="none";
+        finalChapter.style.display = "none";
 
-        const ending =
-            document.getElementById("endingScreen");
+        const ending = document.getElementById("endingScreen");
 
         ending.classList.add("show");
 
-        setTimeout(()=>{
+        // Make sure the ending is visible on mobile
+        ending.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 
-            ending.style.opacity="0";
+        setTimeout(() => {
 
-        },8000);
+            ending.style.opacity = "0";
 
-    },2000);
+        }, 8000);
+
+    }, 2000);
 
 }
 function typeMemory(text, speed = 30) {
