@@ -1,0 +1,749 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    overflow:hidden;
+    height:100vh;
+
+    background:
+    radial-gradient(circle at bottom,#09132b 0%,#030712 70%,black 100%);
+
+    font-family:Arial, Helvetica, sans-serif;
+    color:white;
+}
+
+#stars{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+}
+
+.star{
+
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    background:white;
+
+    border-radius:50%;
+
+    animation:twinkle 3s infinite ease-in-out;
+
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+
+        opacity:0.2;
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        opacity:1;
+        transform:scale(1.8);
+
+    }
+
+}
+
+.content{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    text-align:center;
+
+}
+.fade-out{
+
+    animation:fadeOut 1.5s forwards;
+
+}
+
+@keyframes fadeOut{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+        visibility:hidden;
+
+    }
+
+}
+
+h1{
+
+    font-size:55px;
+
+    margin-bottom:25px;
+
+}
+
+#typing{
+
+    font-size:22px;
+
+    min-height:60px;
+
+    margin-bottom:35px;
+
+    color:#dddddd;
+
+}
+
+button{
+
+    padding:15px 35px;
+
+    font-size:18px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    background:white;
+
+    color:#111;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.08);
+
+}
+/* Clickable Memory Stars */
+
+.memory-star{
+
+    position:absolute;
+
+    width:12px;
+    height:12px;
+
+    background:#fff8b8;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px #fff8b8,
+        0 0 16px #ffe066,
+        0 0 28px rgba(255,255,180,0.5);
+
+    cursor:pointer;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+    animation:
+        twinkle 3s ease-in-out infinite,
+        floatStar 8s ease-in-out infinite;
+
+}
+
+.memory-star:hover{
+
+    transform:scale(1.35);
+
+    box-shadow:
+        0 0 12px #fff,
+        0 0 24px gold,
+        0 0 40px gold;
+
+}
+.memory-star.discovered{
+
+    background:#ffd700;
+
+    box-shadow:
+        0 0 12px gold,
+        0 0 24px gold,
+        0 0 40px gold;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+
+        box-shadow:0 0 10px white;
+
+    }
+
+    50%{
+
+        box-shadow:0 0 30px white;
+
+    }
+
+}
+
+
+/* Modal */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.8);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+}
+
+.modal-content{
+
+    width:420px;
+
+    max-width:90%;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    color:white;
+
+    background:rgba(20,20,35,.75);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    animation:popup .35s ease;
+
+    animation: memoryAppear .6s ease;
+
+}
+
+@keyframes popup{
+
+    from{
+
+        transform:scale(.7);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+.modal-content img{
+
+    width:100%;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
+
+}
+
+#closeModal{
+
+    float:right;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+}
+#memoryCounter{
+
+    margin-top:20px;
+
+    color:#ffd86b;
+
+    font-size:15px;
+
+}
+
+/* Hidden Planet */
+
+#planet{
+
+    position:absolute;
+
+    right:120px;
+
+    top:120px;
+
+    font-size:60px;
+
+    cursor:pointer;
+
+    display:none;
+
+    opacity:0;
+
+    transition:opacity 4s ease;
+
+    animation:planetFloat 5s ease-in-out infinite;
+
+}
+
+#planet.show{
+
+    display:block;
+
+    opacity:1;
+
+}
+
+@keyframes planetFloat{
+
+    0%,100%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+}
+/* ==========================
+   Final Chapter
+========================== */
+
+#finalChapter{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.95);
+
+    z-index:9999;
+
+}
+
+.chapter-card{
+
+    width:650px;
+
+    max-width:90%;
+
+    text-align:center;
+
+    color:white;
+
+    background:rgba(20,20,35,.85);
+
+    backdrop-filter:blur(20px);
+
+    padding:35px;
+
+    border-radius:30px;
+
+    animation:chapterAppear 1s ease;
+
+}
+
+@keyframes chapterAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+#finalPhoto{
+
+    width:240px;
+
+    height:240px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:4px solid white;
+
+    margin-top:30px;
+
+    opacity:0;
+
+    transition:opacity 2s ease;
+
+}
+
+#finalPhoto.show{
+
+    opacity:1;
+
+}
+#chapterTitle{
+
+    color:#FFD700;
+
+    min-height:40px;
+
+    margin-bottom:20px;
+
+}
+
+#finalLetter{
+
+    line-height:1.9;
+
+    min-height:170px;
+
+    white-space:pre-line;
+
+}
+
+#finalLetter{
+
+    margin-top:20px;
+
+    line-height:1.8;
+
+    color:#f3f3f3;
+
+}
+
+#playVoice,
+#showSurprise{
+
+    display:none;
+
+    width:100%;
+
+    margin-top:25px;
+
+}
+
+#showSurprise{
+
+    display:none;
+
+}
+
+#surpriseText{
+
+    display:none;
+
+    margin-top:35px;
+
+    color:white;
+
+    animation:fadeIn 2s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+#playVoice{
+
+    opacity:0;
+
+    transition:opacity 1.5s ease;
+
+}
+
+#playVoice.show{
+
+    display:block;
+
+    opacity:1;
+
+}
+/* ==========================
+   Meteor Shower
+========================== */
+
+.meteor{
+
+    position:fixed;
+
+    width:3px;
+
+    height:120px;
+
+    background:linear-gradient(
+        to bottom,
+        white,
+        rgba(255,255,255,0)
+    );
+
+    border-radius:50px;
+    
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+
+    pointer-events:none;
+
+    z-index:99999;
+
+    animation:meteorFall 2s linear forwards;
+
+}
+
+@keyframes meteorFall{
+
+    from{
+
+        transform:
+            translate(0,0)
+            rotate(45deg);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:
+            translate(-700px,700px)
+            rotate(45deg);
+
+        opacity:0;
+
+    }
+
+}
+/* ==========================
+   Final Ending
+========================== */
+
+#endingScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    background:black;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999999;
+
+    opacity:0;
+
+    transition:opacity 3s ease;
+
+}
+
+#endingScreen.show{
+
+    display:flex;
+
+    opacity:1;
+
+}
+
+#endingContent{
+
+    text-align:center;
+
+    color:white;
+
+    max-width:700px;
+
+    animation:endingFade 3s ease;
+
+}
+
+#endingMessage{
+
+    font-size:28px;
+
+    line-height:1.8;
+
+    margin:40px 0;
+
+}
+
+#endingTitle{
+
+    color:#FFD700;
+
+}
+
+@keyframes endingFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+#memoryImage{
+
+    opacity:0;
+
+    transition:opacity 1s ease;
+
+}
+
+#memoryImage.show{
+
+    opacity:1;
+
+}
+
+#memoryTitle{
+
+    opacity:0;
+
+    transform:translateY(10px);
+
+    transition:all .6s ease;
+
+}
+
+#memoryTitle.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+#memoryText{
+
+    min-height:120px;
+
+    white-space:pre-line;
+
+}
+
+#closeMemory{
+
+    display:none;
+
+    margin-top:25px;
+
+    width:100%;
+
+}
+@keyframes floatStar{
+
+    0%{
+
+        transform:translate(0px,0px);
+
+    }
+
+    25%{
+
+        transform:translate(3px,-4px);
+
+    }
+
+    50%{
+
+        transform:translate(-2px,3px);
+
+    }
+
+    75%{
+
+        transform:translate(4px,2px);
+
+    }
+
+    100%{
+
+        transform:translate(0px,0px);
+
+    }
+
+}
